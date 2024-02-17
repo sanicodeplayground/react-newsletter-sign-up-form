@@ -1,4 +1,5 @@
 // import "./index.css";
+import React, { useState } from "react";
 
 export default function App() {
   return (
@@ -74,14 +75,46 @@ export default function App() {
 }
 
 function Form() {
+  // Set up state hooks for the input value and message
+  const [inputEmail, setInputEmail] = useState("");
+  const [message, setMessage] = useState("");
+  const [messageType, setMessageType] = useState("");
+
+  // Email validation regex
+  const mailFormat = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+
+  // Handle form submision
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    if (!inputEmail) {
+      setMessage("Enter an email");
+      setMessageType("error");
+    } else if (!inputEmail.match(mailFormat)) {
+      setMessage("Valid email required");
+      setMessageType("error");
+    } else {
+      setMessage("Thank you for subscribing!");
+      setMessageType("success");
+      setInputEmail(""); // Clear the input field
+    }
+  };
+
   return (
-    <form action="#" novalidate>
-      <p className="success hidden">Thank you for subscribing!</p>
-      <p className="error hidden">Valid email required</p>
-      <label for="email">
+    <form onSubmit={handleSubmit}>
+      <p
+        className={`success ${messageType !== "success" ? "hidden" : ""}`}
+        id="message"
+      >
+        {messageType === "success" ? message : ""}
+      </p>
+      <label htmlFor="email">
         Email address
-        <span className="error hidden" aria-live="polite">
-          Valid email required
+        <span
+          className={`error ${messageType !== "error" ? "hidden" : ""}`}
+          aria-live="polite"
+        >
+          {messageType === "error" ? message : ""}
         </span>
       </label>
       <input
@@ -89,7 +122,8 @@ function Form() {
         type="email"
         placeholder="email@company.com"
         name="email"
-        required
+        value={inputEmail}
+        onChange={(e) => setInputEmail(e.target.value)}
       />
       <button type="submit">Join the community</button>
     </form>

@@ -1,6 +1,6 @@
 # Description
 
-🎲 Roll the Dice is an interactive web game
+Inline validation newsletter sign up form
 
 ## Table of Contents
 

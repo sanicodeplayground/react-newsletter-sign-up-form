@@ -13,10 +13,9 @@ Inline validation newsletter sign up form
 
 # Features
 - Responsive design
-- React
-  - arrays
-  - form validation
-  - DOM manipulation
+- Use of Regular expression
+- form validation
+- DOM manipulation
 
 # Screenshot
  <img src="https://i.postimg.cc/WpG5vVjZ/temp-Image-Mb-Lb4o.avif">
